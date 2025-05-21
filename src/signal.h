@@ -6,6 +6,7 @@
 
 #include "edf.h"
 
+#include <eigen3/Eigen/Dense>
 
 class Channel {
 public:
@@ -44,9 +45,9 @@ public:
     return std::make_pair(_data.size(), _data[0].getData().size());
   }
   std::vector<std::string> getChannelNames();
-  std::vector<std::vector<float>> getData();
-  Channel& getChannel(size_t index);
-  Channel& getChannel(std::string channelName);
+  Eigen::MatrixXf getData();
+  //Channel& getChannel(size_t index);
+  //Channel& getChannel(std::string channelName);
 
   // TODO: Slicing
 
