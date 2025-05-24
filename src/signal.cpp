@@ -1,4 +1,4 @@
-#include "signal.h"
+#include "../include/signal.h"
 
 Signal::Signal(EDF& edf) {
   std::vector<std::pair<std::string, std::vector<float>>> signalsData = edf.getSignalsData();

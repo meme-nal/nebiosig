@@ -1,4 +1,4 @@
-#include "edf.h"
+#include "../include/edf.h"
 
 EDF::EDF(const std::string& filepath) {
   std::ifstream edfFile(filepath, std::ios::binary);

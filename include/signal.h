@@ -6,7 +6,7 @@
 
 #include "edf.h"
 
-#include <eigen3/Eigen/Dense>
+#include "ext/Eigen/Dense"
 
 class Channel {
 public:
