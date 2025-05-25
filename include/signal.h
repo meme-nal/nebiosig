@@ -31,11 +31,28 @@ private:
 };
 
 
+class Annotation {
+public:
+  Annotation();
+  Annotation(const std::string& eventName, size_t start, size_t end)
+  : _eventName(eventName)
+  , _start(start)
+  , _end(end)
+  {}
+
+private:
+  std::string _eventName;
+  size_t      _start;
+  size_t      _end;
+};
+
+
 class Signal {
 public:
   Signal();
-  Signal(std::vector<Channel>& data)
+  Signal(std::vector<Channel>& data, std::vector<Annotation>& annotations)
   : _data(data)
+  , _annotations(annotations)
   {}
 
   Signal(EDF& edf);
@@ -46,13 +63,14 @@ public:
   }
   std::vector<std::string> getChannelNames();
   Eigen::MatrixXf getData();
-  //Channel& getChannel(size_t index);
-  //Channel& getChannel(std::string channelName);
+  Channel& getChannel(const size_t index);
+  Channel& getChannel(const std::string& channelName);
 
   // TODO: Slicing
 
 private:
-  std::vector<Channel> _data;
+  std::vector<Channel>    _data;
+  std::vector<Annotation> _annotations;
 };
 
 #endif // SIGNAL_H

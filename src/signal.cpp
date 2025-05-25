@@ -1,5 +1,6 @@
 #include "../include/signal.h"
 
+// TODO: add annotations
 Signal::Signal(EDF& edf) {
   std::vector<std::pair<std::string, std::vector<float>>> signalsData = edf.getSignalsData();
   std::vector<std::string> labels = edf.getSignalLabels();
@@ -32,4 +33,24 @@ Eigen::MatrixXf Signal::getData() {
 
   Eigen::MatrixXf data = Eigen::Map<Eigen::Matrix<float, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor>>(flatten_data.data(), rows, cols);
   return data;
+}
+
+
+Channel& Signal::getChannel(const size_t index) {
+  if (index > _data.size()) {
+    throw std::out_of_range("Channel index is out of range");
+  }
+
+  return _data[index];
+}
+
+
+Channel& Signal::getChannel(const std::string& channelName) {
+  for (Channel channel : _data) {
+    if (channel.getLabel() == channelName) {
+      return channel;
+    }
+  }
+
+  throw std::runtime_error("Incorrect channel name");
 }
